@@ -1,9 +1,32 @@
 '''
 @author Matthew Pecko
-
 An algorithm to perform a seive of Eratosthenes. Each number is represented as a Number object.
 '''
 import math
+
+# Simple data structure to store the representaion and value of a number
+class MyNumber:
+    number = None
+    value = None
+    def __init__(self, number, value):
+        self.number = number
+        self.value = value
+
+    def __str__(self):
+        return "{} \t {} ".format(self.number, self.value)
+
+    def getNumber(self):
+        return self.number
+
+    def getValue(self):
+        return self.value
+
+    def setValue(self, value):
+        self.value = value
+
+    def printFormatted(self):
+        print("My number is: ", self.number, " | My value is: ", self.value)
+
 
 
 def main():
@@ -12,10 +35,13 @@ def main():
     Start with the first prime and go to MAX + 1 to make MAX inclusive, storing a True value for every number.
     '''
     MIN = 2
-    MAX = 100
-    A = list()
+    MAX = 2**16
+
+    A = []
+
     for n in range(MIN, MAX+1):
-        A.append(Number(n, True))
+        A.append(MyNumber(n, True))
+
 
     # Do not exceed the sqrt of the size of list because ??? wikipedia pseudocode told me so..
     size = int(math.sqrt(len(A)))
@@ -38,33 +64,9 @@ def main():
                 j = A[i].getNumber()**2 + counter * A[i].getNumber()
         i += 1
 
-    # print all the true values of the list
-    n = 0
-    while n < len(A):
-        if A[n].getValue():
-            A[n].printFormatted()
-        n += 1
-
-
-
-# Simple data structure to store the representaion and value of a number
-class Number:
-    def __init__(self, number, value):
-        self.number = number
-        self.value = value
-
-    def getNumber(self):
-        return self.number
-
-    def getValue(self):
-        return self.value
-
-    def setValue(self, value):
-        self.value = value
-
-    def printFormatted(self):
-        print("My number is: ", self.number, " | My value is: ", self.value)
-
+    for n in A:
+        if n.getValue():
+            print(n)
 
 if __name__ == "__main__":
     main()
